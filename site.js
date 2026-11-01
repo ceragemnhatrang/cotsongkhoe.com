@@ -51,22 +51,23 @@
       var data = Object.fromEntries(new FormData(form).entries());
 
       try {
-        await fetch(SCRIPT_URL, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: { "Content-Type": "text/plain;charset=utf-8" }
-        });
-        messageEl.className = "success";
-        messageEl.textContent = "Gửi thành công! Chúng tôi sẽ liên hệ sớm.";
-        form.reset();
-        fillPageInfo();
-      } catch (err) {
-        messageEl.className = "error";
-        messageEl.textContent = "Chưa gửi được. Vui lòng thử lại hoặc gọi điện trực tiếp.";
-      }
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Gửi thông tin đăng ký";
-    });
+  var res = await fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "text/plain;charset=utf-8" }
+  });
+  var result = await res.json();
+  if (!result.ok) throw new Error(result.error || "Apps Script từ chối");
+
+  messageEl.className = "success";
+  messageEl.textContent = "Gửi thành công! Chúng tôi sẽ liên hệ sớm.";
+  form.reset();
+  fillPageInfo();
+} catch (err) {
+  console.error("Lỗi gửi form:", err);
+  messageEl.className = "error";
+  messageEl.textContent = "Chưa gửi được. Vui lòng thử lại hoặc gọi điện trực tiếp.";
+});
   }
 
   document.addEventListener('click', function (e) {
