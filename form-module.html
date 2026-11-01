@@ -1,0 +1,71 @@
+<!-- form-module.html – Form đăng ký tư vấn. Nạp bằng fetch vào <div id="form-module"></div> -->
+<section id="consult-form" class="form-section">
+  <div class="container">
+    <div class="form-card">
+      <span class="eyebrow">Bắt đầu từ triệu chứng của bạn</span>
+      <h2>Đăng ký tư vấn miễn phí</h2>
+      <p class="intro">Mô tả tình trạng hiện tại. Chúng tôi sẽ liên hệ để hướng dẫn bước tiếp theo.</p>
+
+      <form id="leadForm">
+        <div class="form-group">
+          <label for="name">Họ và tên *</label>
+          <input id="name" type="text" name="name" required autocomplete="name" placeholder="Nguyễn Văn A">
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input id="email" type="email" name="email" required autocomplete="email" placeholder="email@example.com">
+        </div>
+        <div class="form-group">
+          <label for="phone">Số điện thoại *</label>
+          <input id="phone" type="tel" name="phone" required autocomplete="tel" placeholder="0901234567">
+        </div>
+        <div class="form-group">
+          <label for="need">Vấn đề bạn quan tâm</label>
+          <select id="need" name="need">
+            <option value="">-- Chọn vấn đề --</option>
+            <option value="Đau mỏi cổ vai gáy">Đau mỏi cổ vai gáy</option>
+            <option value="Đau lưng dưới">Đau lưng dưới</option>
+            <option value="Tư thế ngồi làm việc">Tư thế ngồi làm việc</option>
+            <option value="Bài tập phục hồi">Bài tập phục hồi</option>
+            <option value="Khác">Khác</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Mô tả tình trạng *</label>
+          <textarea id="message" name="message" rows="4" required placeholder="Bạn đau ở đâu, bị bao lâu, công việc hằng ngày của bạn là gì..."></textarea>
+        </div>
+
+        <input type="hidden" name="pageUrl" id="pageUrl">
+        <input type="hidden" name="pageTitle" id="pageTitle">
+
+        <button type="submit" id="submitBtn">Gửi thông tin đăng ký</button>
+        <div id="formMessage" role="status" aria-live="polite"></div>
+        <p class="form-privacy">Thông tin chỉ dùng để liên hệ về yêu cầu tư vấn của bạn.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+.form-section { padding: 70px 0; background: #F3F8F4; }
+.form-section .container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.form-card { background: #fff; border: 1px solid #D8E4DB; border-top: 5px solid #F6C90E; border-radius: 12px; padding: clamp(22px,4vw,38px); box-shadow: 0 12px 35px rgba(30,107,60,.08); }
+.form-section h2 { text-align: center; margin-bottom: 10px; }
+.form-section .intro { text-align: center; color: #4A5550; margin-bottom: 30px; }
+.eyebrow { display: table; margin: 0 auto 14px; font-size: 13px; font-weight: 700; color: #1E6B3C; background: #EAF4EC; border-radius: 999px; padding: 6px 12px; }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; margin-bottom: 7px; font-weight: 700; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 13px; border: 1px solid #C5D5CA; border-radius: 8px;
+  font: inherit; font-size: 15px; background: #fff; color: #111;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: 3px solid #FFF0A8; border-color: #1E6B3C; }
+.form-group textarea { resize: vertical; }
+#submitBtn { width: 100%; padding: 15px; background: #1E6B3C; color: #fff; border: 0; border-radius: 8px; font: inherit; font-weight: 800; font-size: 16px; cursor: pointer; }
+#submitBtn:hover { background: #17552F; }
+#submitBtn:disabled { opacity: .65; cursor: wait; }
+#formMessage { margin-top: 15px; text-align: center; font-weight: 600; }
+.success { color: #1E6B3C; }
+.error { color: #B42318; }
+.form-privacy { text-align: center; color: #4A5550; font-size: 12px; margin: 14px 0 0; }
+</style>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cột Sống Khỏe – Chăm sóc cột sống mỗi ngày</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+<main id="app"></main>
+<div id="site-footer"></div>
+
+<script src="site.js"></script>
+<script>
+const SITE = {
+  name: "Cột Sống Khỏe",
+  about: "Hướng dẫn chăm sóc cột sống đơn giản: ngồi đúng tư thế, vận động đều đặn và biết khi nào cần gặp bác sĩ.",
+  email: "lienhe@example.com",
+  phone: "0900000000",
+  video: "" // dán link YouTube vào đây
+};
+const FREE = [
+  { id:"tu-the-ngoi", title:"Ngồi đúng tư thế khi làm việc",
+    desc:"Cách chỉnh ghế, bàn và màn hình để cột sống không phải gánh thêm tải suốt 8 tiếng mỗi ngày." },
+  { id:"giai-co-lung-co", title:"Bài tập giãn cơ lưng – cổ",
+    desc:"Chuỗi động tác 10 phút giúp giảm cứng cổ vai gáy, làm được ngay tại bàn làm việc." },
+  { id:"dau-lung-duoi", title:"Đau lưng dưới: khi nào cần đi khám",
+    desc:"Phân biệt đau do mỏi cơ với những dấu hiệu cần gặp bác sĩ sớm." },
+];
+const link = f => "#/" + f.id;
+
+const ART = `<svg class="art" viewBox="0 0 160 300" role="img" aria-label="Minh họa các đốt sống">
+<path d="M80 12C60 60 100 90 80 140S60 220 80 288" fill="none" stroke="#F6C90E" stroke-width="10" stroke-linecap="round" opacity=".7"/>
+${[0,1,2,3,4,5,6,7].map(i=>{const y=20+i*34,x=80+Math.sin(i*0.9)*(-14),w=60-i*2;return `<rect x="${x-w/2}" y="${y}" width="${w}" height="22" rx="9" fill="currentColor" opacity="${1-i*0.07}"/>`}).join("")}
+</svg>`;
+
+const ytId = v => { v = String(v||""); const m = v.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : (/^[\w-]{11}$/.test(v) ? v : ""); };
+const VIDEO = () => { const id = ytId(SITE.video);
+  return `<div class="video"><div class="frame">${id
+    ? `<iframe src="https://www.youtube-nocookie.com/embed/${id}" title="Video giới thiệu ${SITE.name}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`
+    : `<div class="ph"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="3"/><path d="M26 20L46 32L26 44Z" fill="currentColor"/></svg><strong>Video giới thiệu</strong><span>Dán link YouTube vào SITE.video</span></div>`}</div>
+  ${id ? `<a class="alt-link" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">Mở video trên YouTube</a>` : ""}</div>`; };
+
+const M = {
+  hero: d => `<section class="hero ${d.small?'sm':''}"><div class="wrap"><div class="${(d.art||d.video)?'hero-in':''}"><div>
+      <h1>${d.title}</h1><p>${d.text}</p>
+      ${(d.buttons||[]).map((b,i)=>`<a class="btn ${i?'ghost':''}" href="${b[1]}">${b[0]}</a>`).join("")}
+    </div>${d.video?VIDEO():d.art?ART:""}</div></div></section>`,
+  cards: d => `<section class="sec ${d.alt?'alt':''}"><div class="wrap">
+      <div class="sec-head"><h2>${d.title}</h2>${d.text?`<p>${d.text}</p>`:""}</div>
+      <div class="cards">${d.items.map(i=>{
+        const t = i.href?"a":"div";
+        return `<${t} class="card" ${i.href?`href="${i.href}"`:""}><h3>${i.title}</h3><p>${i.text}</p>${i.href?`<span class="more">Xem chi tiết</span>`:""}</${t}>`}).join("")}</div>
+    </div></section>`,
+  steps: d => `<section class="sec ${d.alt?'alt':''}"><div class="wrap">
+      <div class="sec-head"><h2>${d.title}</h2></div>
+      <div class="steps">${d.items.map(i=>`<div class="step"><div><h3>${i.title}</h3><p>${i.text}</p></div></div>`).join("")}</div>
+    </div></section>`,
+  split: d => `<section class="sec ${d.alt?'alt':''}"><div class="wrap split">
+      <div><h2>${d.title}</h2>${d.paras.map(p=>`<p>${p}</p>`).join("")}</div>
+      <div class="panel"><h3>${d.side.title}</h3>${d.side.html}</div>
+    </div></section>`,
+  faq: d => `<section class="sec ${d.alt?'alt':''}"><div class="wrap">
+      <div class="sec-head"><h2>${d.title}</h2></div>
+      <div class="faq">${d.items.map(i=>`<details><summary>${i.q}</summary><p>${i.a}</p></details>`).join("")}</div>
+    </div></section>`,
+  cta: d => `<section class="cta"><div class="wrap"><h2>${d.title}</h2><p>${d.text}</p>
+      <a class="btn" href="${d.button[1]}">${d.button[0]}</a></div></section>`
+};
+
+const landing = f => [
+  {t:"hero", d:{small:true, title:f.title, text:f.desc, buttons:[["Đặt lịch tư vấn","lien-he.html"],["Xem chủ đề khác","#/chia-se"]]}},
+  {t:"cards", d:{title:"Bạn sẽ nhận được", items:[
+    {title:"Hướng dẫn dễ làm", text:"Từng bước rõ ràng, không dùng thuật ngữ y khoa khó hiểu."},
+    {title:"Bài tập và checklist", text:"Động tác minh họa và bảng kiểm tra tư thế dùng được ngay."},
+    {title:"Giải đáp thắc mắc", text:"Trao đổi qua email hoặc điện thoại khi bạn chưa chắc nên làm gì."}]}},
+  {t:"steps", d:{alt:true, title:"Lộ trình áp dụng", items:[
+    {title:"Nhận ra thói quen gây đau", text:"Ghi lại tư thế bạn giữ lâu nhất trong ngày."},
+    {title:"Điều chỉnh trong một tuần", text:"Đổi một thói quen, nghỉ vận động 5 phút sau mỗi giờ ngồi."},
+    {title:"Theo dõi và duy trì", text:"So sánh mức đau trước và sau, giữ lại những gì hiệu quả."}]}},
+  {t:"faq", d:{title:"Câu hỏi thường gặp", items:[
+    {q:"Nội dung này có thay thế việc khám bác sĩ không?", a:"Không. Đây là thông tin tham khảo. Nếu đau kéo dài, tê yếu chân tay hoặc đau sau chấn thương, hãy đi khám."},
+    {q:"Tôi lớn tuổi hoặc đang đau thì có tập được không?", a:"Nên hỏi bác sĩ hoặc chuyên viên vật lý trị liệu trước, sau đó bắt đầu với động tác nhẹ."}]}},
+  {t:"cta", d:{title:"Bắt đầu từ một thay đổi nhỏ", text:"Đăng ký để được tư vấn theo tình trạng của bạn.", button:["Đặt lịch tư vấn","lien-he.html"]}}
+];
+
+const freeCards = FREE.map(f=>({title:f.title, text:f.desc, href:link(f)}));
+const PAGES = {
+  "": {title:"Trang chủ", mods:[
+    {t:"hero", d:{art:true, title:"Cột sống khỏe, mỗi ngày làm việc nhẹ nhõm hơn",
+      text:SITE.about, buttons:[["Xem hướng dẫn miễn phí","#/chia-se"],["Đặt lịch tư vấn","lien-he.html"]]}},
+    {t:"cards", d:{title:"Hướng dẫn miễn phí", text:"Từ đau mỏi cổ vai gáy đến đau lưng dưới: bắt đầu với chủ đề gần với bạn nhất.", items:freeCards}},
+    {t:"cta", d:{title:"Bạn đang bị đau lưng hoặc cổ vai gáy?", text:"Gửi mô tả tình trạng, chúng tôi sẽ trao đổi lại.", button:["Đặt lịch tư vấn","lien-he.html"]}}
+  ]},
+  "gioi-thieu": {title:"Giới thiệu", mods:[
+    {t:"hero", d:{small:true, title:"Giới thiệu", text:"Xin chào, đây là "+SITE.name+"."}},
+    {t:"split", d:{title:"Về chúng tôi", paras:[
+      "Nội dung giới thiệu: kinh nghiệm chuyên môn, chứng chỉ và lý do bạn chia sẻ kiến thức về cột sống.",
+      SITE.about],
+      side:{title:"Thông tin nhanh", html:"<p>Lĩnh vực: cột sống, tư thế, vận động.</p><p>Đối tượng: người làm văn phòng và người hay đau lưng.</p>"}}},
+    {t:"cards", d:{alt:true, title:"Bạn có thể học gì ở đây", items:freeCards}},
+    {t:"cta", d:{title:"Cùng trao đổi", text:"Liên hệ để kết nối.", button:["Liên hệ","lien-he.html"]}}
+  ]},
+  "chia-se": {title:"Hướng dẫn miễn phí", mods:[
+    {t:"hero", d:{small:true, title:"Hướng dẫn miễn phí", text:"Chọn chủ đề phù hợp để bắt đầu."}},
+    {t:"cards", d:{title:"Tất cả chủ đề", items:freeCards}}
+  ]}
+};
+FREE.forEach(f => { PAGES[f.id] = {title:f.title, mods: landing(f)}; });
+
+function render(){
+  const key = location.hash.replace(/^#\/?/, "");
+  const p = PAGES[key] || PAGES[""];
+  document.getElementById("app").innerHTML = p.mods.map(m => M[m.t](m.d)).join("");
+  document.title = (key ? p.title + " – " : "") + SITE.name;
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange", render);
+document.addEventListener("DOMContentLoaded", render);
+</script>
+</body>
+</html>
