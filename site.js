@@ -22,7 +22,7 @@
     // CẤU HÌNH NHẬN FORM — điền URL Google Apps Script của bạn.
     // Không đặt token Telegram trong file này: ai mở trang cũng đọc được.
     // Hãy để Apps Script giữ token và chuyển tiếp tin nhắn sang Telegram.
-    var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxt8f_1gJo24QXZYJxL2ZkELbnrTTXm8ayofHggKeuZmiSxMep0cMMx790jDUF96BQjmQ/exec";
+    var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWc2biiW4bMQ3PXCAGGoI6GLv4PfwWYI6jS_cKPsbvRfxaXn0a8Ad4ualZtxqWNB8iVw/exec";
 
     var pageUrl = document.getElementById("pageUrl");
     var pageTitle = document.getElementById("pageTitle");
