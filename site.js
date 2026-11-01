@@ -28,12 +28,36 @@
     var pageTitle = document.getElementById("pageTitle");
     var messageEl = document.getElementById("formMessage");
     var submitBtn = document.getElementById("submitBtn");
+    var submitText = submitBtn ? submitBtn.textContent : "";
 
     function fillPageInfo() {
       if (pageUrl) pageUrl.value = window.location.href;
       if (pageTitle) pageTitle.value = document.title;
     }
     fillPageInfo();
+
+    // Gửi dữ liệu tới Apps Script. Trả về true nếu thành công.
+    async function sendToScript(data) {
+      var init = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "text/plain;charset=utf-8" }
+      };
+      try {
+        var res = await fetch(SCRIPT_URL, init);
+        var result = await res.json();
+        if (!result.ok) throw new Error(result.error || "Apps Script từ chối");
+        return true;
+      } catch (err) {
+        // Trình duyệt chặn đọc phản hồi (CORS) -> gửi lại dạng no-cors.
+        // Không đọc được kết quả nhưng dữ liệu vẫn tới Apps Script.
+        if (err instanceof TypeError) {
+          await fetch(SCRIPT_URL, Object.assign({}, init, { mode: "no-cors" }));
+          return true;
+        }
+        throw err;
+      }
+    }
 
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -51,23 +75,19 @@
       var data = Object.fromEntries(new FormData(form).entries());
 
       try {
-  var res = await fetch(SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "text/plain;charset=utf-8" }
-  });
-  var result = await res.json();
-  if (!result.ok) throw new Error(result.error || "Apps Script từ chối");
-
-  messageEl.className = "success";
-  messageEl.textContent = "Gửi thành công! Chúng tôi sẽ liên hệ sớm.";
-  form.reset();
-  fillPageInfo();
-} catch (err) {
-  console.error("Lỗi gửi form:", err);
-  messageEl.className = "error";
-  messageEl.textContent = "Chưa gửi được. Vui lòng thử lại hoặc gọi điện trực tiếp.";
-});
+        await sendToScript(data);
+        messageEl.className = "success";
+        messageEl.textContent = "Gửi thành công! Chúng tôi sẽ liên hệ sớm.";
+        form.reset();
+        fillPageInfo();
+      } catch (err) {
+        console.error("Lỗi gửi form:", err);
+        messageEl.className = "error";
+        messageEl.textContent = "Chưa gửi được. Vui lòng thử lại hoặc gọi điện trực tiếp.";
+      }
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitText || "Gửi thông tin đăng ký";
+    });
   }
 
   document.addEventListener('click', function (e) {
