@@ -87,56 +87,7 @@ summary::after{content:"+";position:absolute;right:6px;top:14px;font-size:1.5rem
 details[open] summary::after{transform:rotate(45deg)}
 details p{padding-bottom:12px}
 
-/* form */
-.formbox{max-width:620px;margin:32px auto 0;background:var(--white);padding:36px;border-radius:18px;border-top:6px solid var(--gold);text-align:left;color:var(--ink)}
-label{display:block;font-weight:600;font-size:.95rem;margin:0 0 6px;color:var(--green)}
-input,select,textarea{width:100%;font:400 1rem var(--sans);padding:13px 14px;border:1.5px solid #b9c9c0;border-radius:10px;background:var(--white);color:var(--ink);margin-bottom:18px}
-input:focus,select:focus,textarea:focus{border-color:var(--green);outline:none;box-shadow:0 0 0 3px rgba(216,182,106,.5)}
-.formbox .btn{width:100%}
-.small{font-size:.85rem;opacity:.8;margin-top:14px;max-width:none}
-#ok{display:none;text-align:center}
-#ok h3{font-family:var(--serif);font-size:1.5rem}
 
-/* header */
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--white);z-index:30}
-.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--white);border-bottom:1px solid var(--line)}
-.hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{display:flex;align-items:center;gap:10px;font:600 1.2rem var(--serif);color:var(--green);text-decoration:none}
-.brand i{width:10px;height:28px;border-radius:5px;background:var(--gold);box-shadow:5px 0 0 -1px var(--green)}
-.nav{display:flex;align-items:center;gap:4px}
-.nav a,.nav button{font:500 .95rem var(--sans);color:var(--ink);text-decoration:none;padding:10px 14px;border-radius:8px;background:none;border:0;cursor:pointer}
-.nav a:hover,.nav button:hover{background:var(--mint);color:var(--green)}
-.nav>a:last-child{background:var(--green);color:var(--white);margin-left:8px}
-.nav>a:last-child:hover{background:#1f604b;color:var(--white)}
-.dd{position:relative}
-.dd-menu{display:none;position:absolute;top:calc(100% + 6px);left:0;min-width:300px;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:8px;box-shadow:0 12px 30px rgba(23,77,60,.14)}
-.dd.open .dd-menu{display:block}
-.dd-menu a{display:block}
-.burger{display:none;font:500 .95rem var(--sans);color:var(--green);background:var(--mint);border:0;border-radius:8px;padding:10px 16px;cursor:pointer}
-/* footer */
-.ftr{background:#0f352a;color:rgba(255,255,255,.78);padding:56px 0 0;font-size:.95rem}
-.ftr .cols{display:grid;grid-template-columns:1.4fr 1fr 1.2fr;gap:40px}
-.ftr h3{font:600 1.1rem var(--serif);color:var(--gold);margin-bottom:.8em}
-.ftr p{margin:0}
-.ftr a{text-decoration:none}.ftr a:hover{color:var(--gold);text-decoration:underline}
-.ftr ul{list-style:none;margin:0;padding:0}.ftr li{margin-bottom:8px}
-.ftr .copy{margin-top:40px;padding:20px 0;border-top:1px solid rgba(255,255,255,.15);font-size:.85rem;text-align:center}
-/* form module */
-.form-section .container{max-width:680px;margin:0 auto;padding:0 20px}
-.form-card{background:var(--white);border:1px solid var(--line);border-top:5px solid var(--gold);border-radius:12px;padding:clamp(22px,4vw,38px);box-shadow:0 12px 35px rgba(23,77,60,.08);text-align:left}
-.form-section h2{text-align:center;margin-bottom:10px}
-.form-section .intro{text-align:center;color:var(--ink);margin:0 auto 30px}
-.eyebrow{display:table;margin:0 auto 14px;font-size:13px;font-weight:600;color:var(--green);background:var(--mint);border-radius:999px;padding:6px 12px}
-.form-group{margin-bottom:18px}
-.form-group label{display:block;margin-bottom:7px;font-weight:600}
-.form-group input,.form-group select,.form-group textarea{margin:0;font-size:15px}
-.form-group textarea{resize:vertical}
-#submitBtn{width:100%;padding:15px;background:var(--green);color:var(--white);border:0;border-radius:8px;font:600 16px var(--sans);cursor:pointer}
-#submitBtn:hover{background:#1f604b}
-#submitBtn:disabled{opacity:.65;cursor:default}
-#formMessage{margin-top:15px;text-align:center;font-weight:600}
-.success{color:var(--green)}.error{color:#B42318}
-.form-privacy{text-align:center;font-size:12px;margin:14px auto 0}
 @media(max-width:900px){
  .burger{display:block}
  .nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--white);padding:12px 24px 20px;border-bottom:1px solid var(--line);box-shadow:0 12px 24px rgba(23,77,60,.1)}
@@ -170,7 +121,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    <h1>Bạn đã thực sự quan tâm đến sức khỏe cột sống của mình?</h1>
    <p class="lead">Cổ vai gáy căng mỏi? Lưng thường xuyên khó chịu? Cơ thể kém linh hoạt khi vận động?</p>
    <p>Đừng đợi đến khi những khó chịu ảnh hưởng đến sinh hoạt hằng ngày mới bắt đầu quan tâm. Hãy khám phá trải nghiệm chăm sóc sức khỏe với công nghệ nhiệt và massage.</p>
-   <a class="btn" href="#dang-ky">Đăng ký trải nghiệm miễn phí</a>
+   <a class="btn" href="/lien-he.html">Đăng ký trải nghiệm miễn phí</a>
   </div>
   <img class="spine" src="/Images/tram-benh-tu-cot-song.jpg" alt="Minh họa cột sống">
  </div>
@@ -291,6 +242,5 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 </section>
   
 <div id="site-footer"></div>
-<script src="site.js"></script>
 </body>
 </html>
