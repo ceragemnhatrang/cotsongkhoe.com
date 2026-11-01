@@ -317,88 +317,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
  </div>
 </section>
 
-<section class="mint form-section" id="dang-ky">
-  <div class="container">
-    <div class="form-card">
-      <span class="eyebrow">Bắt đầu từ triệu chứng của bạn</span>
-      <h2>Đăng ký tư vấn miễn phí</h2>
-      <p class="intro">Mô tả tình trạng hiện tại. Chúng tôi sẽ liên hệ để hướng dẫn bước tiếp theo.</p>
-      <form id="leadForm">
-        <div class="form-group"><label for="name">Họ và tên *</label>
-          <input id="name" type="text" name="name" required autocomplete="name" placeholder="Nguyễn Văn A"></div>
-        <div class="form-group"><label for="email">Email *</label>
-          <input id="email" type="email" name="email" required autocomplete="email" placeholder="email@example.com"></div>
-        <div class="form-group"><label for="phone">Số điện thoại *</label>
-          <input id="phone" type="tel" name="phone" required autocomplete="tel" placeholder="0901234567"></div>
-        <div class="form-group"><label for="need">Vấn đề bạn quan tâm</label>
-          <select id="need" name="need">
-            <option value="">-- Chọn vấn đề --</option>
-            <option value="Đau mỏi cổ vai gáy">Đau mỏi cổ vai gáy</option>
-            <option value="Đau lưng dưới">Đau lưng dưới</option>
-            <option value="Tư thế ngồi làm việc">Tư thế ngồi làm việc</option>
-            <option value="Bài tập phục hồi">Bài tập phục hồi</option>
-            <option value="Khác">Khác</option>
-          </select></div>
-        <div class="form-group"><label for="message">Mô tả tình trạng *</label>
-          <textarea id="message" name="message" rows="4" required placeholder="Bạn đau ở đâu, bị bao lâu, công việc hằng ngày của bạn là gì..."></textarea></div>
-        <input type="hidden" name="pageUrl" id="pageUrl">
-        <input type="hidden" name="pageTitle" id="pageTitle">
-        <button type="submit" id="submitBtn">Gửi thông tin đăng ký</button>
-        <div id="formMessage" role="status" aria-live="polite"></div>
-        <p class="form-privacy">Thông tin chỉ dùng để liên hệ về yêu cầu tư vấn của bạn.</p>
-      </form>
+  <section class="hero sm">
+    <div class="wrap">
+      <h1>Đặt lịch tư vấn</h1>
+      <p>Điền thông tin bên dưới, chúng tôi sẽ liên hệ sớm nhất để trao đổi với bạn.</p>
     </div>
-  </div>
-</section>
-
-<footer class="ftr"><div class="wrap">
-  <div class="cols">
-    <div>
-      <h3><a href="index.html#/gioi-thieu">Cột Sống Khỏe</a></h3>
-      <p>Hướng dẫn chăm sóc cột sống đơn giản: ngồi đúng, vận động đều và biết khi nào cần gặp bác sĩ.</p>
-    </div>
-    <div>
-      <h3>Chủ đề</h3>
-      <ul>
-        <li><a href="index.html#/tu-the-ngoi">Ngồi đúng tư thế</a></li>
-        <li><a href="index.html#/giai-co-lung-co">Giãn cơ lưng – cổ</a></li>
-        <li><a href="index.html#/dau-lung-duoi">Đau lưng dưới</a></li>
-      </ul>
-    </div>
-    <div>
-      <h3>Liên hệ</h3>
-      <ul>
-        <li>Email: <a href="mailto:lienhe@example.com">lienhe@example.com</a></li>
-        <li>Điện thoại: <a href="tel:0900000000">0900 000 000</a></li>
-        <li>Youtube: <a href="https://www.youtube.com/">Kênh Cột Sống Khỏe</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="copy">© 2026 Cột Sống Khỏe. Nội dung chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ.</div>
-</div></footer>
-
-<script>
-(function(){
- var burger=document.getElementById('burger'),nav=document.getElementById('nav');
- burger.addEventListener('click',function(){var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
- document.querySelectorAll('[data-dd]').forEach(function(b){
-  b.addEventListener('click',function(e){e.stopPropagation();var d=b.parentNode,o=d.classList.toggle('open');b.setAttribute('aria-expanded',o)});
- });
- document.addEventListener('click',function(){document.querySelectorAll('.dd.open').forEach(function(d){d.classList.remove('open')})});
- document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.dd.open').forEach(function(d){d.classList.remove('open')})});
- document.getElementById('pageUrl').value=location.href;
- document.getElementById('pageTitle').value=document.title;
- var f=document.getElementById('leadForm'),m=document.getElementById('formMessage'),btn=document.getElementById('submitBtn');
- f.addEventListener('submit',function(e){
-  e.preventDefault();
-  var ph=document.getElementById('phone').value.replace(/[\s.\-]/g,'');
-  if(!f.checkValidity()||!/^(\+?84|0)\d{8,10}$/.test(ph)){
-   m.className='error';m.textContent='Vui lòng điền đủ các mục bắt buộc và nhập số điện thoại hợp lệ.';return;
-  }
-  /* Chưa gửi dữ liệu đi đâu: nối với Google Sheet / CRM / email tại đây. */
-  btn.disabled=true;m.className='success';m.textContent='Cảm ơn bạn! Chúng tôi sẽ liên hệ sớm để hướng dẫn bước tiếp theo.';
- });
-})();
-</script>
+  </section>
+  <div id="form-module"></div>
+ <div id="site-footer"></div>
+<script src="site.js"></script>
 </body>
 </html>
