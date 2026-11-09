@@ -56,7 +56,19 @@ h1{font-size:clamp(1.8rem,4.6vw,2.9rem);line-height:1.25;font-weight:800;margin:
 .defs li{padding:14px 18px;margin-bottom:10px;border:1px solid var(--line);border-left:5px solid var(--green);border-radius:8px;background:#fff}
 .defs.warn li{border-left-color:var(--yellow)}
 .defs strong{color:var(--green)}
-figure{margin:1.6em 0}
+.art{min-width:0}                 /* cho phép cột co lại trong grid, không bị ảnh đẩy rộng */
+figure{margin:1.6em 0;max-width:100%}
+.art figure img{
+  display:block;
+  width:100%;                     /* luôn vừa chiều rộng cột bài viết */
+  max-width:100%;
+  height:auto;                    /* giữ đúng tỉ lệ ảnh */
+  max-height:80vh;                /* không cao quá 80% chiều cao màn hình */
+  object-fit:contain;             /* không bị cắt hay méo ảnh */
+  margin:0 auto;
+  border-radius:10px;
+  background:var(--mint);
+}
 .fig{aspect-ratio:16/9;background:var(--mint);border:2px dashed #B9CDBF;border-radius:10px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:14px}
 .fig svg{width:44px;height:44px;margin-bottom:6px}
 figcaption{margin-top:10px;font-size:.88em;color:var(--muted);text-align:center;font-style:italic}
@@ -68,6 +80,8 @@ figcaption{margin-top:10px;font-size:.88em;color:var(--muted);text-align:center;
  .art{order:1}
  .chips{grid-template-columns:repeat(2,1fr)}
  .chips li:last-child{grid-column:1/-1}
+ .art figure img{max-height:60vh;border-radius:8px}
+ figcaption{font-size:.84em}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
